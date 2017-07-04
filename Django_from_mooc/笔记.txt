@@ -1,0 +1,11 @@
+1 通过 Tools -- Run manage.py Task 可以直接打开 manage.py 环境，进行命令输入，比如：statrapp mm，就可以创建 mm 这个app。
+    有一个与项目同名的文件夹，这个文件夹存放的是项目的主要配置文件，如 setting，urls，wsgi等。
+2 创建包：apps--把各个app放入这个包中，方便管理，log--记录日志，media--管理用户上传的文件，static--静态文件，如CSS，JS，静态文件等。
+3 在 manage.py 环境下，通过 makemigrations 命令创建数据库表，再通过 migrate 命令迁移到数据库中。
+
+   笔记写在项目中
+
+4 APP message 只是用于简单功能的介绍和测试，其他APP才是真正的实战。
+
+5 python3安装xadmin，教程：http://blog.csdn.net/u010358168/article/details/72934494
+    以后写

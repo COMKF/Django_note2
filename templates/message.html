@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<form action="{% url 'go_form' %}" method="post" class="smart-green">
+    {% csrf_token %}
+    <h1>留言信息
+        <span>请留下你的信息.</span>
+    </h1>
+    <label>
+        <span>姓名 :</span>
+        <input id="name" type="text" name="name" class="error" value="{{ my_message.name }}" placeholder="请输入您的姓名"/>
+        <div class="error-msg"></div>
+    </label>
+
+    <label>
+        <span>邮箱 :</span>
+        <input id="email" type="email" value="{{ my_message.email }}" name="email" placeholder="请输入邮箱地址"/>
+        <div class="error-msg"></div>
+    </label>
+
+    <label>
+        <span>联系地址 :</span>
+        <input id="address" type="text" value="{{ my_message.address }}" name="address" placeholder="请输入联系地址"/>
+        <div class="error-msg"></div>
+    </label>
+
+    <label>
+        <span>留言 :</span>
+        <textarea id="message" name="message"  placeholder="请输入你的建议">{{ my_message.message }}</textarea>
+        <div class="error-msg"></div>
+    </label>
+    <div class="success-msg"></div>
+    <label>
+        <span>&nbsp;</span>
+        <input type="submit" class="button" value="提交"/>
+    </label>
+{#    <input type='hidden' name='csrfmiddlewaretoken' value='_7#pj1hnmkqx&7&rze=414tq-hrqem%@=n3==c2v&v^bb(4@u2' />#}
+</form>
+{# HTML上if的用法 #}
+{#{% if my_message %}#}
+{#{% else %}#}
+{#{% endif %}#}
+
+{# if的另一种用法：ifequal，它有参数，用来比较这两个参数是否相同。#}
+{# 这个例子中多了一个参数：slice:'6'，加上它，这句代码就变成了截取my_message的前6个字符，与后面的参数进行比较。#}
+{#{% ifequal my_message|slice:'6' 'bobo' %}#}
+{#    {% else %}#}
+{#{% endifequal %}#}
+
+</body>
+</html>
