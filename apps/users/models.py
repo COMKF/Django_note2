@@ -28,12 +28,15 @@ class UserProfile(AbstractUser):
 class EmailVerifyRecord(models.Model):
     code = models.CharField(max_length=20, verbose_name='验证码')
     email = models.EmailField(max_length=50, verbose_name='邮箱')
-    send_type = models.CharField(choices=(('register', '注册'), ('forget', '找回密码')), max_length=10)
+    send_type = models.CharField(choices=(('register', '注册'), ('forget', '找回密码')), max_length=10, verbose_name='验证码类型')
     send_time = models.DateTimeField(default=datetime.now, verbose_name='发送时间')
 
     class Meta:
-        verbose_name = "邮箱验证码"
-        verbose_name_plural = verbose_name
+        verbose_name = "邮箱验证码CESHI"  # 后面加个CESH，看看有什么效果
+        verbose_name_plural = verbose_name  # 把这行代码注释掉，看看有什么效果
+
+    def __str__(self):
+        return '%s(%s)' % (self.code, self.email)  # 用格式化显示EmailVerifyRecord
 
 
 class Banner(models.Model):

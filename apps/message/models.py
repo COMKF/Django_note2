@@ -27,7 +27,7 @@ class UserMessage(models.Model):
 
     # 该类定义表的属性
     class Meta:
-        verbose_name = u'用户留言信息'  # 单数名称
+        verbose_name = u'用户留言信息'  # 单数名称（其实Meta的verbose_name和上面字段的verbose_name都是给用户看的）
         verbose_name_plural = verbose_name  # 复数名称
 
         # db_table，指定table名，如果不指定的话，会自动生成message_usermessage（即，APP_类名）

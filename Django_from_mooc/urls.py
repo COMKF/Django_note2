@@ -17,7 +17,7 @@ from django.conf.urls import url
 
 # 将admin替换为xadmin
 import xadmin
-from apps.message import views
+from message import views
 
 urlpatterns = [
     # url的正则表达式必须以/结尾，即 /$ 这种形式

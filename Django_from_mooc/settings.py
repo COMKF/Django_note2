@@ -11,18 +11,23 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-# import imp
-# from imp import reload
-# from importlib import reload
-# import sys
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # 这行代码的意思是，告诉django，把apps也加入到项目搜索目录中。
 # 默认情况下，Django的搜索目录，只有根目录。也就是说，Django总是从根目录下开始搜索的。
 # 同时，添加了参数0，它告诉服务器，在搜索资源时，先从apps目录中搜索，再从根目录中搜索。
-# 但是吧，我感觉还是从根目录一步一步写，比较好。。
-# sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+
+# 命令行运行服务器与pycharm运行服务器的原理不同。
+# 命令行运行服务器严格按照setting文件执行，因此需要加上这行代码。
+#   (在此，如果每次都通过命令行启动服务器，无疑是很麻烦都。有一个简单都方法：
+#       通过 Tools -- Run manage.py Task 直接打开 manage.py 环境。如果没有报错，则命令行启动服务器也不会报错。)
+# 而pycharm运行服务器只需要进行标记就行了。
+# 如果想要在这两种情况下都能正常运行，加上各自都方法就行了。
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,11 +45,11 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # 注册自己的APP
-    'apps.message',
-    'apps.users',
-    'apps.courses',
-    'apps.organization',
-    'apps.operation',
+    'message',
+    'users',
+    'courses',
+    'organization',
+    'operation',
     # 接下来使用 xadmin 替换 Django 自带的 admin，安装方法见笔记
     'xadmin',
     'crispy_forms',
