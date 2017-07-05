@@ -8,4 +8,11 @@
 4 APP message 只是用于简单功能的介绍和测试，其他APP才是真正的实战。
 
 5 python3安装xadmin，教程：http://blog.csdn.net/u010358168/article/details/72934494
-    以后写
+    （1）使用源码安装xadmin，下载地址：https://github.com/sshwsfc/xadmin.git
+        下载完成后，把压缩包内的xadmin文件夹复制到项目到主目录中，并在APP中注册，把它当作一个APP使用。
+    （2）pip install xadmin。
+    （3）pip uninstall xadmin。这两步的目的是获取xadmin的依赖包。
+    （4）除此之外，还需要安装其他的包：
+        pip install future
+        pip install six
+    （5）最后，可能需要在 manage.py 环境下执行 makemigrations 和 migrate，迁移 xadmin 的数据表。

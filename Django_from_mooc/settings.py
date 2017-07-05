@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'apps.courses',
     'apps.organization',
     'apps.operation',
-    # 接下来使用 xadmin 替换 Django 自带的 admin，首先使用pip install xadmin命令，进行安装
+    # 接下来使用 xadmin 替换 Django 自带的 admin，安装方法见笔记
     'xadmin',
     'crispy_forms',
     # 需要导入两个包
@@ -65,7 +65,6 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    # 'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

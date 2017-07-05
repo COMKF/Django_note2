@@ -1,5 +1,7 @@
 import operator
-from functools import reduce
+from future.utils import iteritems
+from xadmin import widgets
+from xadmin.plugins.utils import get_context_dict
 
 from django.contrib.admin.utils import get_fields_from_path, lookup_needs_distinct
 from django.core.exceptions import SuspiciousOperation, ImproperlyConfigured, ValidationError
@@ -10,15 +12,13 @@ from django.template import loader
 from django.utils import six
 from django.utils.encoding import smart_str
 from django.utils.translation import ugettext as _
-from future.utils import iteritems
 
-from xadmin import widgets
 from xadmin.filters import manager as filter_manager, FILTER_PREFIX, SEARCH_VAR, DateFieldListFilter, \
     RelatedFieldSearchFilter
-from xadmin.plugins.utils import get_context_dict
 from xadmin.sites import site
-from xadmin.util import is_related_field
 from xadmin.views import BaseAdminPlugin, ListAdminView
+from xadmin.util import is_related_field
+from functools import reduce
 
 
 class IncorrectLookupParameters(Exception):

@@ -36,7 +36,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6.1 virtualenv at ~/Desktop/Django_mooc/testvir" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6.1 virtualenv at ~/Desktop/mooc-virtualenv/venv" project-jdk-type="Python SDK" />
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
   </component>
