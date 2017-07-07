@@ -15,6 +15,11 @@ class EmailVerifyRecordAdmin(object):  # 注意，它继承的是object
 
     list_filter = ['code', 'email', 'send_type', 'send_time']  # 添加过滤器功能
 
+    model_icon = 'fa fa-envelope'  # 定制显示图标
+    ordering = ['-send_time']  # 定制排序规则
+    readonly_fields = ['send_time']  # 设置只读字段
+    exclude = ['code']  # 设置隐藏字段。需要说明的是，readonly_fields和exclude是冲突的，同一字段同时存在这两个设置内的话，其中一个设置会无效。
+
 
 xadmin.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)  # 将管理器注册
 
@@ -41,10 +46,10 @@ class BaseSetting(object):  # 基本设置
 xadmin.site.register(views.BaseAdminView, BaseSetting)  # 将BaseSetting中的设置注册到BaseAdminView中
 
 
-class GlobalSetting(object):    # 全局设置
+class GlobalSetting(object):  # 全局设置
     site_title = 'YMH个人网站'  # 设置页眉和 HTML 标题。
-    site_footer = 'YMH版权所有'     # 设置页脚
-    menu_style = 'accordion'    # 设置左侧侧边栏显示方式。
+    site_footer = 'YMH版权所有'  # 设置页脚
+    menu_style = 'accordion'  # 设置左侧侧边栏显示方式。
 
 
 xadmin.site.register(views.CommAdminView, GlobalSetting)  # 将GlobalSetting中的设置注册到CommAdminView中

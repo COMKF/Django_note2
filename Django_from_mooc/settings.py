@@ -26,9 +26,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #       通过 Tools -- Run manage.py Task 直接打开 manage.py 环境。如果没有报错，则命令行启动服务器也不会报错。)
 # 而pycharm运行服务器只需要进行标记就行了。
 # 如果想要在这两种情况下都能正常运行，加上各自都方法就行了。
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
-sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
-
+sys.path.insert(0, os.path.join(BASE_DIR, '../../apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, '../../extra_apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -42,6 +41,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
+# 该字段设置自定义的登录模式
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+)
 
 INSTALLED_APPS = [
     # 注册自己的APP
@@ -53,7 +56,10 @@ INSTALLED_APPS = [
     # 接下来使用 xadmin 替换 Django 自带的 admin，安装方法见笔记
     'xadmin',
     'crispy_forms',
-    # 需要导入两个包
+    # 'reversion',  # 官方上说这个包需要添加上去，但是目前看来并不需要
+    # 使用xadmin，需要导入两个包
+    'captcha',  # 注册图片验证码的包
+    'pure_pagination',  # 分页功能包
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,8 +87,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # DIRS，该参数配置模版的目录，配置完成后，即会在该目录下寻找HTML文件。
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, '../../templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,6 +95,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 配置 MEDIA_URL 后，需要加上下面这个处理类，这样的话，template才能处理{{ MEDIA_URL }}
+                # （这个类在python2中位于core下）
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -103,7 +111,7 @@ WSGI_APPLICATION = 'Django_from_mooc.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, '../../db.sqlite3'),
         # 如何配置其他数据库，如mysql。
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'djangotest',
@@ -155,7 +163,28 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-# 如果找不到静态文件，就这样配置。如同TEMPLATES的配置。
+# 如果找不到静态文件，就这样配置，它的作用是配置静态文件的路径。如同TEMPLATES的配置。
+# 这样配置之后，以后在 HTML 中引用静态文件，可以直接以 /static 开头，这样 Django 就会自动在静态文件目录中查找。
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, '../../static')
 ]
+
+# 配置与邮箱有关的参数或字段
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 456
+EMAIL_HOST_USER = '1943336161@qq.com'
+EMAIL_HOST_PASSWORD = 'YEZI999999'
+EMAIL_USE_TLS = False
+EMAIL_FROM = '1943336161@qq.com'
+
+# 配置上传资源的目录，上传资源时，会在URL路径前自动加上 /media/
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '../../media')
+
+# 分页配置，可自定义
+# PAGINATION_SETTINGS = {
+#     'PAGE_RANGE_DISPLAYED': 10,   # 中间显示数
+#     'MARGIN_PAGES_DISPLAYED': 2,  # 首尾显示数
+#
+#     'SHOW_FIRST_PAGE_WHEN_INVALID': True,   # 显示直接跳首页的按钮
+# }

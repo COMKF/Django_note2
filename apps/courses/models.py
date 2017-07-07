@@ -7,11 +7,11 @@ class Course(models.Model):
     name = models.CharField(max_length=50, verbose_name='课程名')
     desc = models.CharField(max_length=300, verbose_name='课程描述')
     detail = models.TextField(verbose_name='课程详情')  # TextField用于不设置长度的字段
-    degree = models.CharField(choices=(('cj', '初级'), ('zj', '中级'), ('gj', '高级')), max_length=2,verbose_name='难度')
+    degree = models.CharField(choices=(('cj', '初级'), ('zj', '中级'), ('gj', '高级')), max_length=2, verbose_name='难度')
     learn_times = models.IntegerField(default=0, verbose_name='学习时长')
     student = models.IntegerField(default=0, verbose_name='学习人数')
     fav_nums = models.IntegerField(default=0, verbose_name='收藏人数')
-    image = models.ImageField(upload_to='image/%Y/%m', verbose_name='封面图', max_length=100)
+    image = models.ImageField(default='', upload_to='image/%Y/%m', verbose_name='封面图', max_length=100)
     click_nums = models.IntegerField(default=0, verbose_name='点击量')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 

@@ -20,10 +20,14 @@ class CourseOrg(models.Model):
     city = models.ForeignKey(CityDict, verbose_name='所在城市')
     name = models.CharField(max_length=50, verbose_name='机构名称')
     desc = models.TextField(verbose_name='机构描述')
+    category = models.CharField(max_length=15, choices=(('pxjg', '培训机构'), ('gr', '个人'), ('gx', '高校')),
+                                verbose_name='机构类别', default='pxjg')
     click_nums = models.IntegerField(default=0, verbose_name='点击量')
     fav_nums = models.IntegerField(default=0, verbose_name='收藏人数')
     image = models.ImageField(upload_to='org/%Y/%m', verbose_name='封面图', max_length=100)
-    address = models.CharField(max_length=150, default='机构地址')
+    address = models.CharField(max_length=150, verbose_name='机构地址', default='')
+    students = models.IntegerField(default=0, verbose_name='学习人数')
+    course_nums = models.IntegerField(default=0, verbose_name='课程数')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
