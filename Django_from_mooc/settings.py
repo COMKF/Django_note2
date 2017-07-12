@@ -26,8 +26,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #       通过 Tools -- Run manage.py Task 直接打开 manage.py 环境。如果没有报错，则命令行启动服务器也不会报错。)
 # 而pycharm运行服务器只需要进行标记就行了。
 # 如果想要在这两种情况下都能正常运行，加上各自都方法就行了。
-sys.path.insert(0, os.path.join(BASE_DIR, '../../apps'))
-sys.path.insert(0, os.path.join(BASE_DIR, '../../extra_apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -87,7 +87,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # DIRS，该参数配置模版的目录，配置完成后，即会在该目录下寻找HTML文件。
-        'DIRS': [os.path.join(BASE_DIR, '../../templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,7 +111,7 @@ WSGI_APPLICATION = 'Django_from_mooc.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '../../db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         # 如何配置其他数据库，如mysql。
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'djangotest',
@@ -166,7 +166,7 @@ STATIC_URL = '/static/'
 # 如果找不到静态文件，就这样配置，它的作用是配置静态文件的路径。如同TEMPLATES的配置。
 # 这样配置之后，以后在 HTML 中引用静态文件，可以直接以 /static 开头，这样 Django 就会自动在静态文件目录中查找。
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../../static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 # 配置与邮箱有关的参数或字段
@@ -179,7 +179,7 @@ EMAIL_FROM = '1943336161@qq.com'
 
 # 配置上传资源的目录，上传资源时，会在URL路径前自动加上 /media/
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '../../media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 分页配置，可自定义
 # PAGINATION_SETTINGS = {

@@ -90,7 +90,7 @@ class RegisterView(View):
             user.email = email
             user.is_active = False  # 设置用户为未激活状态，只有点击激活链接后才激活
             # 对密码进行加密，使其保存在数据库中是一个密文
-            user.password = make_password(password)
+            user.set_password(password)  # user.password = make_password(password)，二者是一样的
             user.save()
 
             # 注册时需要验证邮箱，调用utils内的方法
@@ -115,3 +115,4 @@ class ActiveUserView(View):
         return render(request, "login.html")
 
 # 忘记密码--略
+# 修改密码时，要用 u.set_password(password)

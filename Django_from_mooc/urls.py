@@ -37,10 +37,12 @@ urlpatterns = [
     url(r'^captcha/', include('captcha.urls')),
     url(r'^active/(?P<active_code>.*)/$', ActiveUserView.as_view, name='user_active'),
 
-    # 机构首页
-    url(r'^org_list/$', OrgView.as_view(), name='org_list'),
+    # 课程机构url配置
+    url(r'^org/', include('organization.urls', namespace='org', app_name='organization')),
 
+    # 课程url配置
+    url(r'^courses/', include('courses.urls', namespace='courses', app_name='courses')),
 
     # 因为显示图片使用了data-url属性，所以要为显示图片专门配置一个url。
-    url(r'^media/(?P<path>.*)/$', serve, {'document_root':MEDIA_ROOT}),
+    url(r'^media/(?P<path>.*)/$', serve, {'document_root': MEDIA_ROOT}),
 ]

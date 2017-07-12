@@ -1,6 +1,30 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block title %}课程机构列表 - 慕学在线网{% endblock %}
+{% block custom_js %}
+    <script>
+    $(function(){
+        $('#jsStayBtn').on('click', function(){
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url:"{% url 'org:add_ask' %}",
+                data:$('#jsStayForm').serialize(),
+                async: true,
+                success: function(data) {
+                    if(data.status == 'success'){
+                        $('#jsStayForm')[0].reset();
+                        alert("提交成功")
+                    }else if(data.status == 'fail'){
+                        alert(data.msg)
+                        $('#jsCompanyTips').html(data.msg)
+                    }
+                },
+            });
+        });
+    })
+</script>
+{% endblock %}
 {% block custom_bread %}
     <section>
         <div class="wp">
@@ -57,9 +81,8 @@
                         {% for org in all_orgs.object_list %}
                             <dl class="des difdes">
                                 <dt>
-                                    <a href="org-detail-homepage.html">
-                                        <img width="200" height="120" class="scrollLoading"
-                                             data-url="{{ MEDIA_URL }}{{ org.image }}"/>
+                                    <a href="{% url 'org:org_home'  org.id %}">
+                                        <img width="200" height="120" src="{{ MEDIA_URL }}{{ org.image }}"/>
                                     </a>
                                 </dt>
                                 <dd>
@@ -121,7 +144,8 @@
             </div>
             <div class="right companyright">
                 <div class="head">我要学习</div>
-                <form class="rightform" id="jsStayForm">
+                <form class="rightform" id="jsStayForm" method="post">
+                    {% csrf_token %}
                     <div>
                         <img src="{% static 'images/rightform1.png' %}"/>
                         <input type="text" name="name" id="companyName" placeholder="名字" maxlength="25"/>
@@ -136,7 +160,6 @@
                     </div>
                     <p class="error company-tips" id="jsCompanyTips"></p>
                     <input class="btn" type="text" id="jsStayBtn" value="立即咨询 >"/>
-                    <input type='hidden' name='csrfmiddlewaretoken' value='5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy'/>
                 </form>
             </div>
 

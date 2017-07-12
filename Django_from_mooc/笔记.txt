@@ -49,11 +49,24 @@
                 注意：即使base页面写了{% load staticfiles %}，子页面还是需要写上{% load staticfiles %}。
         （3）假如服务器向子页面传输了数据，base也能够使用。
 
-10 在网页上显示图片时，不能用src，而是用 data-url，同时，如果配置了 MEDIA_URL ，则需要在 data-url 的值的最前面加上它。
+10 删除~~~~~~~
 
 11 分页功能：pip install django-pure-pagination。并在APP下注册：'pure_pagination',
 
 12 int型数据从后台传到页面时，不能直接与str类型的数据比较，需要格式化，方法是：city.id|stringformat:'i'。
     当然，应该时时刻刻注意格式的问题。
 
-13 从7.7开始不做笔记。
+13 HTML，有时需要使用AJAX技术，这时，需要返回JSON数据，需要import JsonResponse，且参数是一个dict。
+
+14 可以用all_teachers = course_org.teacher_set.all()，获取 外键为 course_org 的所有teacher。
+    也可以用all_teachers = Teacher.objects.filter(course_org=course_org)，两者效果一样。
+
+15 request.path可获得url路径。可通过使用路径匹配的方式（{% ifequal request.path|slice:'4' '/org'%}），达到标签选中的效果。
+    可能会因此，需要修改url路径。
+
+16 搜索功能，filter(name__icontains=keyword)。这就是忽略大小写的匹配name字段的搜索。
+
+17 image_form = ImageForm(request.POST,request.FILES),若使用ModelForm验证图片时，需要加上request.FILES参数，因为图片放在FILES里。
+    image_form = ImageForm(request.POST,request.FILES，instance=request.user),若在ModelForm里加上instance参数，就会实例化一个model，可直接调用save方法，更方便。
+
+18 视频播放到11.1

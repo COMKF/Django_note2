@@ -2,8 +2,11 @@ from datetime import datetime
 
 from django.db import models
 
+from organization.models import CourseOrg
+
 
 class Course(models.Model):
+    course_org = models.ForeignKey(CourseOrg, verbose_name='课程机构', null=True, blank=True)
     name = models.CharField(max_length=50, verbose_name='课程名')
     desc = models.CharField(max_length=300, verbose_name='课程描述')
     detail = models.TextField(verbose_name='课程详情')  # TextField用于不设置长度的字段
@@ -21,6 +24,16 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
+
+    # 定义函数获取更多的需要的值
+    # 获取课程章节数
+    def get_zj_nums(self):
+        return self.lesson_set.all().count()
+        pass
+
+    # 获取学习的用户
+    def get_learn_users(self):
+        return  self.usercourse_set.all()[:5]
 
 
 class Lesson(models.Model):
