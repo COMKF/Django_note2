@@ -16,4 +16,4 @@ class UserAskForm(forms.ModelForm):
         mobile_re = re.compile(r'^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$')
         if not mobile_re.match(mobile):
             raise forms.ValidationError('手机号码格式错误')
-        return module
+        return mobile

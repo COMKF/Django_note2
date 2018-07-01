@@ -16,6 +16,7 @@
     （4）除此之外，还需要安装其他的包：
         pip install future
         pip install six
+        pip install django-import-export
     （5）最后，可能需要在 manage.py 环境下执行 makemigrations 和 migrate，迁移 xadmin 的数据表。
 
 6 小技巧：我们可以为新建文件添加初始化内容。点击PyCharm--Preferences--Editor--File and code Templates。
